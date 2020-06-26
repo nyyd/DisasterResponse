@@ -33,7 +33,6 @@ def load_data(database_filepath):
 
 #word processing
 def tokenize(text):
-    tokenize(text):
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
     processed_txt = []
