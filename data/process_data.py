@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
 
+#load csv data
 def load_data(messages_filepath, categories_filepath):  
    #load dataset
     messages = pd.read_csv(messages_filepath)
@@ -13,10 +14,9 @@ def load_data(messages_filepath, categories_filepath):
     df = messages.merge(categories, on='id')
     return df
 
-
-def clean_data(df):
-     categories = df['categories'].str.split(pat=';', expand=True)
-f
+=def clean_data(df):
+    # create a dataframe of the 36 individual category columns
+    categories = df['categories'].str.split(pat=';', expand=True)
     row = categories.loc[0]
     category_colnames = row.apply(lambda x:x[:-2])
     categories.columns = category_colnames
@@ -31,16 +31,16 @@ f
     df=df.drop('categories',axis=1)
     df = pd.concat([df,categories],axis=1)
     df = df.drop_duplicates()
-    return df
+    return d
 
-
+#store processed data as db file
 def save_data(df, database_filename): 
     #engine = create_engine('sqlite:///'+ str (database_filename))
     #engine = create_engine('sqlite:///{}'.format(database_filename))
 
     #engine = create_engine('sqlite:///../data/DisasterResponse.db')
-    #engine = create_engine('sqlite:///data/DisasterResponse.db')
-    engine = create_engine('sqlite:///' + database_filename)
+    engine = create_engine('sqlite:///data/DisasterResponse.db')
+    #engine = create_engine('sqlite:///' + database_filename)
     df.to_sql('messages_disaster', engine, index=False, if_exists = 'replace')
       
 
