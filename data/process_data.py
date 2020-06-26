@@ -14,7 +14,7 @@ def load_data(messages_filepath, categories_filepath):
     df = messages.merge(categories, on='id')
     return df
 
-=def clean_data(df):
+def clean_data(df):
     # create a dataframe of the 36 individual category columns
     categories = df['categories'].str.split(pat=';', expand=True)
     row = categories.loc[0]
