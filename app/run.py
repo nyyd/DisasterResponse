@@ -9,11 +9,9 @@ from plotly.graph_objs import Bar
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
 
-from sqlalchemy.schema import MetaData
-
-
 app = Flask(__name__)
 
+#work  processing using nltk functions
 def tokenize(text):
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
