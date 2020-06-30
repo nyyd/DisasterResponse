@@ -31,7 +31,7 @@ def clean_data(df):
     df=df.drop('categories',axis=1)
     df = pd.concat([df,categories],axis=1)
     df = df.drop_duplicates()
-    return d
+    return df
 
 #store processed data as db file
 def save_data(df, database_filename): 
