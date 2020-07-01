@@ -19,7 +19,7 @@ Machine learning pipeline that:
 - Splites dateset to training and testing
 - Trains machine learning model and evaluates using dataset
 - Save model as pickle file
-To run this module, go to command promt and use the following command
+To run this module, go to command promt and use the following command \n
     python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 
 
