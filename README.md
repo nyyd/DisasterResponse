@@ -10,8 +10,7 @@ process_data.py is a data prepocessing pipeline that:
 - Merges datasets
 - Removes duplicate
 - Stores data as sqlite 
-To run this module, go to command promt and use the following command
-    python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+
 
 #### ML Pipeline
 Machine learning pipeline that:
@@ -19,13 +18,10 @@ Machine learning pipeline that:
 - Splites dateset to training and testing
 - Trains machine learning model and evaluates using dataset
 - Save model as pickle file
-To run this module, go to command promt and use the following command \n
-    python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 
 
 #### Flask Web App
-Calling app will run a web application that receives messages during disaster. The app classifes the type of the receives messages so approprite relief agnecy can help. to start the app run the following
-    python run.py
+Calling app will run a web application that receives messages during disaster. The app classifes the type of the receives messages so approprite relief agnecy can help. 
 
 ### Instructions to Run Web App:
 1. Run the following commands in the project's root directory to set up your database and model.
