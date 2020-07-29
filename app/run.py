@@ -50,6 +50,10 @@ def index():
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
+    
+    category_names = df.iloc[:,4:].columns
+    category_boolean = (df.iloc[:,4:] != 0).sum().values
+    
     graphs = [
         {
             'data': [
@@ -66,6 +70,24 @@ def index():
                 },
                 'xaxis': {
                     'title': "Genre"
+                }
+            }
+        },
+        {
+                        'data': [
+                Bar(
+                    x=category_names,
+                    y=category_boolean
+                )
+            ],
+            'layout': {
+                'title': 'Distribution of Message Categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Category",
+                    'tickangle': 35
                 }
             }
         }
