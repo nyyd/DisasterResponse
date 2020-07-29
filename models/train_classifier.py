@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 from sqlalchemy import create_engine
 import nltk
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
+from nltk.tokenizeimport word_tokenize
+from nlt k.stem import WordNetLemmatizer
 from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn import multioutput
@@ -28,8 +28,8 @@ def load_data(database_filepath):
     print(df.head())
     X = df['message']
     y = df[df.columns[4:]]
-    category_names = y.columns
-    return X, y, category_names
+    category_names    = y.columns
+    return y, category_names
 
 #word processing
 def tokenize(text):
@@ -54,7 +54,7 @@ def build_model():
 #model evaluation
 def evaluate_model(model, X_test, Y_test, category_names):
     test_pred = model.predict (X_test)
-    avrg_results(true, pred):
+    avrg_results(true, pred)
     results = pd.DataFrame(columns=['Category', 'f_score', 'precision', 'recall'])
     num = 0
     #model scoring
@@ -78,8 +78,8 @@ def main():
     if len(sys.argv) == 3:
         database_filepath, model_filepath = sys.argv[1:]
         print('Loading data...\n    DATABASE: {}'.format(database_filepath))
-        X, Y, category_names = load_data(database_filepath)
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+        X, Y, category_names        = load_data(database_filepath)
+       n, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
         
         print('Building model...')
         model = build_model()
