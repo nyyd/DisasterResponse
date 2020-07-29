@@ -24,7 +24,7 @@ def load_data(database_filepath):
     """Load the filepath and return the data"""
     name = 'sqlite:///' + database_filepath
     engine = create_engine(name)
-    df = pd.read_sql_table('df', con=engine) # is table always called this? 
+    df = pd.read_sql_table('messages_disaster', con=engine) # is table always called this? 
     print(df.head())
     X = df['message']
     y = df[df.columns[4:]]
@@ -33,13 +33,19 @@ def load_data(database_filepath):
 
 #word processing
 def tokenize(text):
+    text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
+    
     tokens = word_tokenize(text)
+    stop_words = stopwords.words("english")
     lemmatizer = WordNetLemmatizer()
-    processed_txt = []
-    for tok in tokens:
-        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
-        processed_txt.append(clean_tok)
-    return processed_txt
+    tokens = [lemmatizer.lemmatize(word) for word in tokens if word not in stop_words]
+    
+    
+#    processed_txt = []
+#    for tok in tokens:
+#        clean_tok = lemmatizer.lemmatize(tok).lower().strip()
+#        processed_txt.append(clean_tok)
+#    return processed_txt
 
 #model instantiation and training
 def build_model():
@@ -48,12 +54,21 @@ def build_model():
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier (RandomForestClassifier()))
         ])
-    model=pipeline.fit(X_train, y_train)
-    return model
+   #model=pipeline.fit(X_train, y_train)
+    parameters = {
+        #'vect__max_df': [0.75, 1.0],
+        'tfidf__smooth_idf': [True, False]
+        'clf__estimator__n_estimators': [10, 20]
+    }
+
+    cv = GridSearchCV(pipeline, param_grid=parameters, verbose=2)
+
+    return cv
+    #return model
 
 #model evaluation
-def evaluate_model(model, X_test, Y_test, category_names):
-    test_pred = model.predict (X_test)
+def evaluate_model(cv, X_test, Y_test, category_names):
+    test_pred = cv.predict (X_test)
     avrg_results(true, pred)
     results = pd.DataFrame(columns=['Category', 'f_score', 'precision', 'recall'])
     num = 0
