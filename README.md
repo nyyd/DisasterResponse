@@ -23,6 +23,31 @@ Machine learning pipeline that:
 #### Flask Web App
 Calling app will run a web application that receives messages during disaster. The app classifes the type of the receives messages so approprite relief agnecy can help. 
 
+#### Files
+
+C:\WORKSPACE
+|   README.md
+|   
++---app
+|   |   run.py              //Flask file to run the web application
+|   |   
+|   \---templates           //contains html file for the web application
+|           go.html
+|           master.html
+|           
++---data
+|       DisasterResponse.db      // output of the ETL pipeline
+|       disaster_categories.csv  // datafile of all the categories
+|       disaster_messages.csv    // datafile of all the messages
+|       process_data.py          //ETL pipeline scripts
+|       
+\---models
+        train_classifier.py      //machine learning pipeline scripts to train and export a classifier
+|
+ \---Notebook
+        ETL Pipeline Preparation.ipynb # notebook to process data
+        ML Pipeline Preparation.ipynb # notebook to train classifier
+
 ### Instructions to Run Web App:
 1. Run the following commands in the project's root directory to set up your database and model.
 
