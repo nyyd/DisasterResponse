@@ -21,6 +21,8 @@ def clean_data(df):
     category_colnames = row.apply(lambda x:x[:-2])
     categories.columns = category_colnames
 
+
+categories.head()
     for column in categories:
     # set each value to be the last character of the string
         categories[column] = categories[column].str[-1]
