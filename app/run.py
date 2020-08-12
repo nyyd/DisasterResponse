@@ -31,7 +31,7 @@ engine = create_engine('sqlite:///../data/DisasterResponse.db')
 #engine = create_engine('sqlite:///../data/DisasterResponse.db')
 #meta = MetaData(engine, schema='a')
 #meta.reflect(only=['ads_skus'], views=True)
-df = pd.read_sql_table('messages_disaster', engine)
+df = pd.read_sql_table('DisasterResponse', engine)
 
 
 # load model
@@ -44,16 +44,18 @@ model = joblib.load("../models/classifier.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+    # TODO: Below is an example - modify to extract data for your own visuals
+
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     
     category_names = df.iloc[:,4:].columns
     category_boolean = (df.iloc[:,4:] != 0).sum().values
-    
+
+
     graphs = [
         {
             'data': [
@@ -81,13 +83,13 @@ def index():
                 )
             ],
             'layout': {
-                'title': 'Distribution of Message Categories',
+                'title': 'Percentage of Needs',
                 'yaxis': {
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Category",
-                    'tickangle': 35
+                    'title': "Needs",
+                    #'tickangle': 35
                 }
             }
         }
