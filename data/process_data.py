@@ -16,13 +16,14 @@ def load_data(messages_filepath, categories_filepath):
 
 def clean_data(df):
     # create a dataframe of the 36 individual category columns
-    categories = df['categories'].str.split(pat=';', expand=True)
+    #categories = df['categories'].str.split(pat=';', expand=True)
+    categories = df.categories.str.split(expand=True,pat=';')
     row = categories.loc[0]
     category_colnames = row.apply(lambda x:x[:-2])
     categories.columns = category_colnames
+    
 
-
-categories.head()
+#categories.head()
     for column in categories:
     # set each value to be the last character of the string
         categories[column] = categories[column].str[-1]
@@ -41,10 +42,11 @@ def save_data(df, database_filename):
     #engine = create_engine('sqlite:///{}'.format(database_filename))
 
     #engine = create_engine('sqlite:///../data/DisasterResponse.db')
-    engine = create_engine('sqlite:///data/DisasterResponse.db')
-    #engine = create_engine('sqlite:///' + database_filename)
-    df.to_sql('messages_disaster', engine, index=False, if_exists = 'replace')
-      
+    #create_engine("sqlite:///data\DisasterResponse.db") 
+    #engine = create_engine('sqlite:///data/DisasterResponse.db')
+    engine = create_engine('sqlite:///' + database_filename)
+    df.to_sql('DisasterResponse', engine, index=False, if_exists = 'replace')
+    return df  
 
 def main():
     if len(sys.argv) == 4:
